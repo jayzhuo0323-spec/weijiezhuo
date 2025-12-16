@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domestic Violence: Supporting Students in Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c5f7e;
+            --secondary-color: #d4886f;
+            --accent-color: #e8b298;
+            --dark-text: #2d3748;
+            --light-text: #64748b;
+            --bg-light: #faf9f7;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --emergency-red: #c53030;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Crimson Pro', serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: var(--dark-text);
+        }
+
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e4a63 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            pointer-events: none;
+        }
+
+        .site-header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .site-header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .student-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: inline-block;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .student-info p {
+            margin: 0.25rem 0;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            background: var(--bg-white);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            z-index: 100;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1.25rem;
+            text-decoration: none;
+            color: var(--dark-text);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Page Sections */
+        .page-section {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            position: relative;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-section:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .page-section:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .page-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Emergency Box */
+        .emergency-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border: 3px solid var(--emergency-red);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 16px rgba(197, 48, 48, 0.15);
+        }
+
+        .emergency-box h2 {
+            color: var(--emergency-red);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .emergency-box h2::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        /* Lists */
+        ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin: 0.75rem 0;
+            line-height: 1.8;
+        }
+
+        li strong {
+            color: var(--primary-color);
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, #e6f3f9 0%, #d1e9f5 100%);
+            border-left: 5px solid var(--primary-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 2px 12px rgba(44, 95, 126, 0.1);
+        }
+
+        .critical-reflection {
+            background: linear-gradient(135deg, #fef5e7 0%, #fadba8 100%);
+            border-left: 5px solid var(--secondary-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            box-shadow: 0 2px 12px rgba(212, 136, 111, 0.15);
+        }
+
+        .critical-reflection h3,
+        .critical-reflection h4,
+        .critical-reflection strong {
+            color: var(--secondary-color);
+            font-style: normal;
+        }
+
+        /* Stats Box */
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(212, 136, 111, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Warning Signs Grid */
+        .warning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .warning-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .warning-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+
+        .warning-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+
+        .resources-section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .resources-section a:hover {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .citation {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            border-left: 3px solid var(--border-color);
+            color: var(--light-text);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0.75rem 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-box,
+            .warning-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-section {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <h1>Domestic Violence: Supporting Students in Education</h1>
+        <p class="subtitle">A Resource Website for Educators</p>
+        <div class="student-info">
+            <p><strong>Student Name:</strong> Weijie Zhuo</p>
+            <p><strong>Student ID:</strong> 110485618</p>
+            <p><strong>Course:</strong> Foundations of Learning and Development: A Child Centred Approach</p>
+            <p><strong>Tutor:</strong> Benjamin Dibb</p>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="#page1" class="nav-link">Introduction</a>
+            <a href="#page2" class="nav-link">What is DV?</a>
+            <a href="#page3" class="nav-link">Warning Signs</a>
+            <a href="#page4" class="nav-link">Impacts on Development</a>
+            <a href="#page5" class="nav-link">Vulnerable Groups</a>
+            <a href="#page6" class="nav-link">Aboriginal & Torres Strait Islander</a>
+            <a href="#page7" class="nav-link">Whole-School Approaches</a>
+            <a href="#page8" class="nav-link">Families & Community</a>
+            <a href="#page9" class="nav-link">Resources</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page 1: Introduction -->
+        <section id="page1" class="page-section">
+            <span class="page-number">Page 1</span>
+            <h1 class="page-title">Introduction - Welcome Educators</h1>
+            
+            <p>This website provides essential information and practical strategies for educators supporting students affected by domestic violence. Each page offers quick, accessible information with links to more detailed resources.</p>
+
+            <h2>Why This Matters for Educators</h2>
+            <p>Domestic violence is one of the most commonly reported issues affecting children's educational outcomes and wellbeing in Australian schools. As educators, you are uniquely positioned to:</p>
+            
+            <ul>
+                <li><strong>Identify</strong> students who may be experiencing domestic violence</li>
+                <li><strong>Provide</strong> safe, trauma-informed support in the classroom</li>
+                <li><strong>Connect</strong> families with appropriate services and resources</li>
+                <li><strong>Create</strong> protective environments that promote resilience</li>
+            </ul>
+
+            <div class="emergency-box">
+                <h2>Emergency Contacts</h2>
+                <ul>
+                    <li><strong>Police Emergency:</strong> 000</li>
+                    <li><strong>1800RESPECT (24/7 Counselling):</strong> 1800 737 732</li>
+                    <li><strong>Kids Helpline (5-25 years):</strong> 1800 55 1800</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Page 2: What is Domestic Violence? -->
+        <section id="page2" class="page-section">
+            <span class="page-number">Page 2</span>
+            <h1 class="page-title">What is Domestic Violence?</h1>
+            
+            <div class="highlight-box">
+                <h2>Definition</h2>
+                <p>Domestic and family violence (DFV) refers to a pattern of behaviours used to control, dominate or intimidate a partner or family member (AIHW, 2023). DFV extends beyond physical assault and includes a range of abusive actions that create fear, reduce autonomy, and cause emotional or physical harm.</p>
+            </div>
+
+            <h2>Forms of Domestic Violence</h2>
+            <ul>
+                <li><strong>Physical violence:</strong> Hitting, pushing, choking, using weapons</li>
+                <li><strong>Sexual abuse:</strong> Forced sexual acts, sexual coercion</li>
+                <li><strong>Emotional/psychological abuse:</strong> Intimidation, threats, constant criticism, humiliation</li>
+                <li><strong>Economic abuse:</strong> Controlling finances, preventing employment, withholding money</li>
+                <li><strong>Social abuse:</strong> Isolating from family and friends, monitoring communications</li>
+                <li><strong>Technology-facilitated abuse:</strong> Using technology to stalk, harass, or control</li>
+            </ul>
+
+            <h2>Prevalence in Australia</h2>
+            <div class="stats-box">
+                <div class="stat-item">
+                    <span class="stat-number">39.6%</span>
+                    <p>Australian children are exposed to domestic violence</p>
+                    <small>(AIHW, 2023)</small>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12%</span>
+                    <p>Children in Australia witness parental violence</p>
+                    <small>(AIHW, 2023)</small>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1 in 5</span>
+                    <p>Adults have experienced family violence</p>
+                    <small>(AIHW, 2023)</small>
+                </div>
+            </div>
+
+            <p>According to AIHW (2023), 20% of adults across the country have experienced family violence from the age of 15. Domestic violence is a major national health and welfare issue and can have lifelong effects on victims, survivors, and perpetrators.</p>
+
+            <p>It occurs across all ages and backgrounds, but it disproportionately affects women and children. According to Fitz-Gibbon et al. (2022), young people who witness or experience domestic violence are 9.2 times more likely to perpetrate family violence compared to those who have not experienced childhood abuse.</p>
+
+            <p>These findings clearly demonstrate that domestic violence is both widespread and has severe consequences for children. Educators must take this issue seriously and strengthen their awareness and response.</p>
+
+            <h2>The Impact on Children</h2>
+            <p>It occurs across all ages and backgrounds, but women and children are disproportionately affected. According to Fitz-Gibbon et al. (2022), young people who witness or experience family violence are 9.2 times more likely to perpetrate domestic violence later in life compared with those who have not experienced childhood abuse. These findings highlight that family violence is not only widespread but also has severe consequences for children. Educators therefore need to take this issue seriously and remain attentive to signs of risk.</p>
+        </section>
+
+        <!-- Page 3: Recognising Warning Signs -->
+        <section id="page3" class="page-section">
+            <span class="page-number">Page 3</span>
+            <h1 class="page-title">Recognising Warning Signs</h1>
+            
+            <div class="highlight-box">
+                <p>Children may not directly tell educators that they are experiencing domestic violence, but their behaviors, emotions, academic performance or social interactions are all indicators that they are going through domestic violence. Educators are usually the first professionals to notice signs of domestic violence experienced by children at home. Early identification and intervention can protect children and connect them with support services (de Benedictis et al., 2004).</p>
+            </div>
+
+            <h2>Warning Signs:</h2>
+            
+            <h3>Behavior Change (Osofsky, 1995; Stanley, 2011)</h3>
+            <ul>
+                <li><strong>Externalising behaviours:</strong> aggression, tantrums, bullying, violent outbursts, and defiance toward authority.</li>
+                <li><strong>Internalising behaviours:</strong> withdrawal, being overly quiet, social isolation, and emotional numbness.</li>
+                <li><strong>Regressive behaviours:</strong> bed-wetting, thumb-sucking, or acting significantly younger than their actual age.</li>
+                <li><strong>Perfectionism:</strong> trying to be the "perfect child" in an attempt to avoid conflict at home.</li>
+            </ul>
+
+            <h3>School and learning indicators (Stanley, 2011; Osofsky, 1995)</h3>
+            <ul>
+                <li>Sudden or persistent decline in academic performance</li>
+                <li>Significant difficulties with attention and concentration</li>
+                <li>Inability to complete homework or classroom tasks</li>
+                <li>Low or irregular attendance; frequent lateness</li>
+                <li>Loss of interest or reduced participation in school activities</li>
+            </ul>
+
+            <h3>Physical Indicators (de Benedictis et al., 2004; Stanley, 2011)</h3>
+            <ul>
+                <li>Unexplained bruises, cuts, or other physical injuries</li>
+                <li>Frequent somatic complaints such as headaches or stomach aches</li>
+                <li>Signs of fatigue or lack of sleep</li>
+                <li>Wearing inappropriate clothing (e.g., long sleeves in hot weather to cover injuries)</li>
+            </ul>
+
+            <h3>Social and Emotional Indicators (Osofsky, 1995; de Benedictis et al., 2004)</h3>
+            <ul>
+                <li>Difficulty in establishing or maintaining relationships with peers</li>
+                <li>Excessive vigilance or overreacting to sudden sounds/ movements</li>
+                <li>Depression, frequent crying, mood swings</li>
+                <li>Low self-esteem, self-blame</li>
+            </ul>
+
+            <p>These signals are reactions to trauma, not "bad behavior". Research shows that such harm accumulates. If not effectively helped, children who have been exposed to domestic violence for a long time will experience more severe consequences (Stanley, 2011).</p>
+            
+            <p>Educators should learn to observe and identify warning signs, and provide effective assistance to children in a timely manner.</p>
+        </section>
+
+        <!-- Page 4: Impacts on Development and Learning -->
+        <section id="page4" class="page-section">
+            <span class="page-number">Page 4</span>
+            <h1 class="page-title">Impacts on Development and Learning</h1>
+            
+            <p>Exposure to domestic violence during critical developmental periods can have profound and lasting effects on children's neurological, physical, emotional, and social development.</p>
+
+            <h2>Impact on Child Development</h2>
+            
+            <h3>Early Childhood (0-5) (Stanley, 2011; Osofsky, 1995):</h3>
+            <ul>
+                <li>Delay in the development of language, motor skills or social skills</li>
+                <li>Sleep disorders, nightmares and difficulty in falling asleep</li>
+                <li>Temper tantrums, excessive crying, difficulty in calming down</li>
+                <li>Regression behaviors: bedwetting, thumb-sucking, increased crying</li>
+                <li>PTSD-like symptoms: repeated experiencing of trauma, avoidance, increased alertness</li>
+            </ul>
+
+            <h3>School-age child (6-12) (Stanley, 2011; Osofsky, 1995; de Benedictis et al., 2004):</h3>
+            <ul>
+                <li>Academic challenges, grade decline and reduction in educational achievements</li>
+                <li>Depression and low self-esteem (de Benedictis et al., 2004)</li>
+                <li>Exhibiting behavioral problems at home or at school, or attempting to be a "perfect child"</li>
+                <li>Self-blame and feeling guilty about violence</li>
+                <li>Physical symptoms such as frequent headaches and stomachaches</li>
+            </ul>
+
+            <h3>Adolescence (13-18) (Stanley, 2011; Osofsky, 1995; de Benedictis et al., 2004):</h3>
+            <ul>
+                <li>Depression, illegal behavior and aggression</li>
+                <li>School problems, truancy and decline in academic performance</li>
+                <li>High-risk behaviors: drug abuse, unprotected sexual behavior, violence</li>
+                <li>Suicide attempts</li>
+                <li>Seeking revenge and using violence to enhance one's reputation</li>
+                <li>Emotional numbness and giving up hope for the future</li>
+            </ul>
+
+            <p>These impacts are not isolated; rather, they reinforce one another in a harmful cycle. Sleep disturbances lead to fatigue in class, which affects attention and academic performance. Academic failure then exacerbates low self-esteem and depression. Depression contributes to social withdrawal, resulting in the loss of peer support. The lack of support further increases children's vulnerability (Osofsky, 1995; Stanley, 2011).</p>
+
+            <p>A deeper issue is that children are not only harmed in the moment, but also learn a dangerous belief that "violence is a way to solve problems" (de Benedictis et al., 2006). However, this is not a genetic destiny; it is a learned behavioural pattern based on incorrect modelling, which means it can be changed.</p>
+
+            <p>Schools are the key places to break the cycle. For many children, educators may be the only stable and safe adult in their lives. A teacher who believes in them and sees the trauma rather than "bad behavior", and who provides a predictable classroom environment, can all become powerful protective factors (Stanley, 2011).</p>
+        </section>
+
+        <!-- Page 5: High-Risk and Vulnerable Groups -->
+        <section id="page5" class="page-section">
+            <span class="page-number">Page 5</span>
+            <h1 class="page-title">High-Risk and Vulnerable Groups</h1>
+            
+            <p>While domestic violence affects people across all demographics, certain groups of children and young people face higher risks and vulnerabilities.</p>
+
+            <h2>Aboriginal and Torres Strait Islander Children</h2>
+            <p>The proportion of Aboriginal and Torres Strait Islander children experiencing domestic violence is significantly higher. 67% of First Nations adults who suffered physical harm reported that the perpetrator was a family member (AIHW, 2024). Indigenous women are 27-35 times more likely to be hospitalized due to domestic violence than non-Indigenous women, and this rate increases to 51 times in remote areas; the hospitalization rate for attacks related to domestic violence is 30 times that of non-Indigenous Australians (AIHW, 2024).</p>
+
+            <h2>Children with Disabilities</h2>
+            <p>Studies have shown that approximately 30% of children who have experienced domestic violence are disabled children (Octoman et al., 2022). The exposure rate of disabled children is twice that of non-disabled children, and the likelihood of their mothers being hospitalized due to violence is also twice (8% vs 4%) (Octoman et al., 2022). Up to 50% of disabled women have experienced domestic violence (Tayton et al., 2014).</p>
+            
+            <p>The vulnerability of disabled children is mainly manifested in increased dependence on caregivers, communication disorders, limited ability to obtain assistance, systemic barriers (such as a waiting list for services lasting for a year), and cross-disadvantages (Octoman et al., 2022; Tayton et al., 2014).</p>
+
+            <h2>Children from CALD Backgrounds</h2>
+            <p>Australia's multicultural characteristics (with 30% of the population born overseas and 20% speaking languages other than English at home) mean that a large number of children come from CALD backgrounds (AIHW, 2024). Why are these children more vulnerable? These children face language barriers, visa fears, cultural norms (shame, marriage protection), social isolation, and fears of child protection, all of which collectively inhibit disclosure and seeking help (AIHW, 2024)。</p>
+        </section>
+
+        <!-- Page 6: The extra impact on Aboriginal and Torres Strait Islander children -->
+        <section id="page6" class="page-section">
+            <span class="page-number">Page 6</span>
+            <h1 class="page-title">The extra impact on Aboriginal and Torres Strait Islander children</h1>
+            
+            <div class="highlight-box">
+                <p>The impact of domestic and family violence (DFV) on Aboriginal and Torres Strait Islander children is even more severe. This harm is compounded by historical trauma, structural inequality, and the lack of culturally safe support services (Cripps, 2023).</p>
+            </div>
+
+            <h2>Higher Exposure and Greater Risk</h2>
+            <p>Indigenous children are more likely than non-Indigenous children to experience or witness domestic violence. Emotional abuse (including exposure to violence) is the most common confirmed injury among Indigenous children, accounting for 48%, and the incidence rate is 7 times that of non-Indigenous children (Cripps, 2023). Exposing children to severe and repeated violence more frequently.</p>
+
+            <h2>Psychological Impacts</h2>
+            <p><strong>The cumulative psychological risks for indigenous children are higher:</strong></p>
+            <ul>
+                <li>43% of 6–10-year-old indigenous children have more than 6 long-term psychological risk factors</li>
+                <li>41% were exposed to domestic violence before the age of 10 (Cripps, 2023)</li>
+            </ul>
+            <p>These risks significantly increase the likelihood of their experiencing anxiety, PTSD, depression, and dropping out of school.</p>
+
+            <h2>Intergenerational Trauma and Structural Inequity</h2>
+            <p>Cripps (2023) pointed out that indigenous family violence must be understood within the historical context of colonization, forced removal of children, racial discrimination, and social economic marginalization.</p>
+            
+            <p><strong>These historical and structural issues lead to:</strong></p>
+            <ul>
+                <li>Damaged parent-child attachment</li>
+                <li>Normalization of violent behavior</li>
+                <li>Increased risk of substance abuse</li>
+                <li>Higher suicide risk in adolescence and adulthood</li>
+            </ul>
+        </section>
+
+        <!-- Page 7: Whole-School Approaches and Classroom support -->
+        <section id="page7" class="page-section">
+            <span class="page-number">Page 7</span>
+            <h1 class="page-title">Whole-School Approaches and Classroom support</h1>
+            
+            <h2>Whole-School Approach: Creating Systemic Safety</h2>
+            <p>Although the teacher's efforts are important, they are not sufficient for children who have experienced domestic violence. What these children need is a consistent, school-wide safety net. When children feel safe in one classroom but encounter harsh or inconsistent responses elsewhere, this in itself is a re-traumatizing experience. The core of the whole-school trauma-informed approach is a fundamental mindset shift -- as emphasized at the end of page 4, from "What's wrong with you?" to "What happened to you?". This requires the entire school community, from leadership to every staff member, to clearly understand how to identify and respond to domestic violence. Additionally, consistent training and the creation of a predictable and safe school environment are also necessary (Stanley, 2011).</p>
+
+            <h2>Trauma-Informed Classroom: Breaking the Cycle</h2>
+            <p>In classroom strategies, I believe that what is most helpful for students is not any specific strategy, but how you fundamentally understand and respond to behaviors. When a "aggressive" or "withdrawal" child described on Page 3 appears in your classroom, a trauma-informed perspective helps you see that these behaviors are survival strategies, not defiance or laziness. Your consistency, care, and the predictability of the classroom environment provide many children with the stability that is lacking at home (Osofsky, 1995; Stanley, 2011). When you notice a student's abnormality, if educators can promptly detect it and respond from the perspective of the school, the vicious cycle created by trauma can be broken.</p>
+
+            <h2>Cultural considerations</h2>
+            <p>For indigenous children and children from culturally and linguistically diverse backgrounds (CALD), we cannot use a one-size-fits-all approach. Indigenous children need to see their culture respected and integrated into the classroom, not just a token mention. CALD children may have language difficulties, and their families' understanding of "seeking help" may be very different from ours. As educators, we should actively learn about their culture and incorporate it into teaching from their perspective, which will make children feel truly included and accepted (AIHW, 2024; Cripps, 2023).</p>
+
+            <div class="critical-reflection">
+                <h3>Critical reflection:</h3>
+                <p>As educators, we are under a lot of pressure: we have to keep up with the curriculum, prepare for various exams, and deal with endless administrative requirements. But when a child witnessed domestic violence last night, he simply can't focus on doing math problems today. This doesn't mean we should give up on academic requirements; rather, we need to understand that a brain in fear cannot absorb information. Sometimes, making the child feel safe first is more important than advancing the teaching schedule. Where is this balance point? There is no standard answer; we need to judge it based on specific circumstances.</p>
+                
+                <p>Research shows that for many traumatized children, having a stable and caring adult in their lives can bring about significant changes (Stanley, 2011). You don't need a psychology degree, nor do you need to know all the answers. What's important is that you remain there - not giving up on the child because of their "bad behavior", and believing that they can improve. Sometimes, it is this belief and persistence that can change a child's life trajectory.</p>
+            </div>
+        </section>
+
+        <!-- Page 8: Families and Community -->
+        <section id="page8" class="page-section">
+            <span class="page-number">Page 8</span>
+            <h1 class="page-title">Working with Families and Community Partnerships</h1>
+            
+            <div class="highlight-box">
+                <p>When a warning signs are detected, it is natural for us to contact the parents. However, in cases of domestic violence, cooperating with the family requires following three core principles.</p>
+            </div>
+
+            <h2>Principles for Working with Families</h2>
+            
+            <h3>1. Safety First</h3>
+            <p>Your primary responsibility is to protect the safety of children and non-abusive parents. This means that before making contact, you should carefully assess: when to contact? Through what method? Will it put the victim at a greater risk? As mentioned on page 6, the fear of indigenous families regarding children being taken away, and the concerns of CALD families regarding visas and deportation, are all real safety concerns (Cripps, 2023; AIHW, 2024). Any communication must prioritize not worsening the situation.</p>
+
+            <h3>2. Confidentiality and Privacy</h3>
+            <p>The conversation with parents should be conducted in a private setting to avoid discussing sensitive topics in front of other parents or students. While respecting family privacy, it is also necessary to clearly explain the legal requirements of mandatory reporting, such as under what circumstances you must report and what will happen after the report. Although this transparency may make the conversation uncomfortable, it can build trust. For CALD families, ensure that translation services are provided to guarantee that the private conversation is truly confidential.</p>
+
+            <h3>3. Non-Judgmental Support</h3>
+            <p>The conversation with parents should be conducted in a private setting to avoid discussing sensitive topics in front of other parents or students. While respecting family privacy, it is also necessary to clearly explain the legal requirements of mandatory reporting, such as under what circumstances you must report and what will happen after the report. Although this transparency may make the conversation uncomfortable, it can build trust. For CALD families, ensure that translation services are provided to guarantee that the private conversation is truly confidential.</p>
+
+            <h2>Community connection:</h2>
+            <p>Although educators keep emphasizing community connection and community support, the current situation is that many communities lack adequate services. For instance, indigenous children need indigenous organizations, CALD children need language-appropriate services, and disabled children face waiting periods of up to one year (Octoman et al., 2022). These problems cannot be solved solely by the efforts of teachers or schools. The government should also increase its attention and accelerate the promotion of community support systems.</p>
+            
+            <p>As a teacher, effective referral is not just about providing a list of phone numbers; it involves knowing which services are appropriate, facilitating contact, and following up. More importantly, when repeatedly observing insufficient services, one should speak up for change.</p>
+
+            <div class="critical-reflection">
+                <h3>Critical reflection:</h3>
+                <p>The journey from Page 1 to the present shows that behind domestic violence lies systemic issues: poverty, racism, insufficient services, and discriminatory policies (Cripps, 2023; AIHW, 2024).</p>
+                
+                <p>Yes, Page 4 tells us that the relationships between individual teachers can be protective factors. This is important. But it is also crucial to recognize the limitations: you cannot change the family situation, nor can you eliminate the systemic obstacles described in Page 6. However, this does not mean you can do nothing. Documenting problem patterns, advocating for insufficient services, and supporting policy reforms are also actions that can attempt to influence the entire system.</p>
+                
+                <p>Our power lies not only in one-on-one assistance, but also in being part of a larger change. Every safe interaction, every appropriate referral, and every advocacy contributes to the cumulative effort to change this issue.</p>
+                
+                <p>Breaking the cycle of violence (Page 4) depends on the joint efforts of educators, families, communities, and the system. Your persistence and advocacy are an indispensable part of this larger picture.</p>
+            </div>
+        </section>
+
+        <!-- Page 9: Resources -->
+        <section id="page9" class="page-section resources-section">
+            <span class="page-number">Page 9</span>
+            <h1 class="page-title">Resources</h1>
+            
+            <div class="citation">
+                <p>Australian Institute of Health and Welfare. (2023). <em>Family and domestic violence.</em> <a href="https://www.aihw.gov.au/family-domestic-and-sexual-violence/types-of-violence/family-domestic-violence" target="_blank">https://www.aihw.gov.au/family-domestic-and-sexual-violence/types-of-violence/family-domestic-violence</a></p>
+            </div>
+
+            <div class="citation">
+                <p>Australian Institute of Health and Welfare. (2024). <em>Aboriginal and Torres Strait Islander people: Impacts of family, domestic and sexual violence</em>. <a href="https://www.aihw.gov.au/family-domestic-and-sexual-violence/population-groups/aboriginal-and-torres-strait-islander-people#impacts" target="_blank">https://www.aihw.gov.au/family-domestic-and-sexual-violence/population-groups/aboriginal-and-torres-strait-islander-people#impacts</a></p>
+            </div>
+
+            <div class="citation">
+                <p>Holt, S., Buckley, H., & Whelan, S. (2008). The impact of exposure to domestic violence on children and young people: A review of the literature. <em>Child abuse & neglect, 32</em>(8), 797-810.</p>
+            </div>
+
+            <div class="citation">
+                <p>Osofsky, J. D. (1995). Children who witness domestic violence: The invisible victims. <em>Social Policy Report, 9</em>(3), 1-16.</p>
+            </div>
+
+            <div class="citation">
+                <p>Stanley, N. (2011). Children experiencing domestic violence: A research review. <em>Research in Practice</em>.</p>
+            </div>
+
+            <div class="citation">
+                <p>De Benedictus, T., & Jaffe, J. (2004). Domestic violence and abuse: Types, signs, symptoms, causes, and effects. <em>Helpguide: Mental Health Issues</em>.</p>
+            </div>
+
+            <div class="citation">
+                <p>Kyllie Cripps. (2023). Indigenous domestic and family violence, mental health and suicide. Canberra: AIHW. doi:10.25816/5wc8-m742</p>
+            </div>
+
+            <div class="citation">
+                <p>Fitz-Gibbon, K., Meyer, S., Boxall, H., Maher, J., & Roberts, S. (2022). Adolescent family violence in Australia: A national study of prevalence, history of childhood victimisation and impacts.</p>
+            </div>
+
+            <div class="citation">
+                <p>Tayton, S., Kaspiew, R., Moore, S., & Campo, M. (2014). Groups and communities at risk of domestic and family violence. <em>A review and evaluation of domestic and family violence prevention and early intervention services focusing on at-risk groups and communities. Melbourne: Australian Institute of Family Studies</em>.</p>
+            </div>
+
+            <div class="citation">
+                <p>Octoman, O., Hawkes, M., Lima, F., O'Donnell, M., Orr, C., Arney, F., ... & Brebner, C. (2022). <em>The nature and extent of domestic and family violence exposure for children and young people with disability</em>. Australia's National Research Organisation for Women's Safety Limited (ANROWS).</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2024 Weijie Zhuo | Foundations of Learning and Development</p>
+        <p>This website is created for educational purposes as part of university coursework.</p>
+    </footer>
+</body>
+</html>
